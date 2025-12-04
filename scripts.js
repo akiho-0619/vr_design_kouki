@@ -58,7 +58,7 @@ let stoneModel, treeModel;
 // });
 
 for (let i = 0; i < char_count; i++) {
-    let char = new Character(`Character_${i}`, 100, 10);
+    let char = new Character(`Character_${i}`, 100, 10, create);
     characters.push(char);
 }
 

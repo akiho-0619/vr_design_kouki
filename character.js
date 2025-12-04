@@ -1,8 +1,5 @@
-import { init } from "easy-three";
-const { camera, create, animate, controls, load } = init();
-
 export class Character {
-    constructor(name, health, strength) {
+    constructor(name, health, strength, create) {
         this.name = name;
         this.health = health;
         this.strength = strength;

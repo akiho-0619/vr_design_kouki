@@ -1,5 +1,3 @@
-import { init } from "easy-three";
-const { camera, create, animate, controls, load } = init();
 export class MapObject{
     constructor(model, position, rotation){
         this.model = model;

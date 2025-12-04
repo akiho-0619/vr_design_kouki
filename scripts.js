@@ -7,19 +7,6 @@ let map_size = [20, 20];
 let char_count = 10;
 let characters = [];
 
-// class Character {
-//     constructor(name, health, strength) {
-//         this.name = name;
-//         this.health = health;
-//         this.strength = strength;
-//         this.body = create.cube({ size: 0.3, position: [Math.random() * 10-5, 0.15, Math.random() * 10-5]  });
-//     }
-//     attack(target) {
-//         target.health -= this.strength;
-//         console.log(`${this.name} attacks ${target.name} for ${this.strength} damage!`);
-//     }
-// }
-
 controls.connect()
 camera.position.set(-2, 2, 2)
 create.ambientLight(
@@ -67,7 +54,9 @@ console.log(characters);
 
 
 animate(({ delta, time }) => {
-    
+    for (let char of characters) {
+        char.move();
+    }
 })
 
 function main(){

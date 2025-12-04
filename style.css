@@ -1,0 +1,12 @@
+#params {
+    min-height: 100px;
+    min-width:100px;
+    position:absolute;
+    background-color: red;
+    left:45%;
+    bottom:0px;
+    }
+
+body{
+    max-height: 100vh;
+}

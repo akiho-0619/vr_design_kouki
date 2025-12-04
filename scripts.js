@@ -1,5 +1,24 @@
 import { init } from "easy-three";
-const { camera, create, animate, controls, load } = init();
+const { camera, create, animate, controls, load, helper } = init();
+import { Character } from "./character.js";
+// import { MapObject } from "./MapObjects.js";
+
+let map_size = [20, 20];
+let char_count = 10;
+let characters = [];
+
+// class Character {
+//     constructor(name, health, strength) {
+//         this.name = name;
+//         this.health = health;
+//         this.strength = strength;
+//         this.body = create.cube({ size: 0.3, position: [Math.random() * 10-5, 0.15, Math.random() * 10-5]  });
+//     }
+//     attack(target) {
+//         target.health -= this.strength;
+//         console.log(`${this.name} attacks ${target.name} for ${this.strength} damage!`);
+//     }
+// }
 
 controls.connect()
 camera.position.set(-2, 2, 2)
@@ -7,9 +26,10 @@ create.ambientLight(
     { intensity:10}
 )
 create.directionalLight()
-create.cube()
+helper.axes();
+create.sky();
 
-const ground = create.plane({
+let ground = create.plane({
     size:10,
     rotation:[-Math.PI/2, 0, 0],
     option:{
@@ -18,9 +38,33 @@ const ground = create.plane({
         }),
     }
 })
+let walls = [
+    create.cube({ size:[10.2,1,0.2], position:[0,0.5,-5.1], option:{ color:"white"} }),
+    create.cube({ size:[10.2,1,0.2], position:[0,0.5,5.1], option:{ color:"white"} }),
+    create.cube({ size:[0.2,1,10.2], position:[-5.1,0.5,0], option:{ color:"white"} }),
+    create.cube({ size:[0.2,1,10.2], position:[5.1,0.5,0], option:{ color:"white"} }),
+]
+console.log(walls);
 
-const stone_model = models.load("./models/namaqualand_boulder_03_1k.gltf")
-const tree_model = models.load("./models/tree_small_02_1k.gltf")
+let stoneModel, treeModel;
+
+// load.gltf("./models/namaqualand_boulder_03_1k.gltf").then(vrm => {
+//     stoneModel = vrm;
+//     stoneModel.scene.scale.set(0.5, 0.5, 0.5);
+// });
+// load.gltf("./models/tree_small_02_1k.gltf").then(vrm => {
+//     treeModel = vrm;
+//     treeModel.scene.scale.set(0.5, 0.5, 0.5);
+// });
+
+for (let i = 0; i < char_count; i++) {
+    let char = new Character(`Character_${i}`, 100, 10);
+    characters.push(char);
+}
+
+console.log(characters);
+
+
 
 animate(({ delta, time }) => {
     

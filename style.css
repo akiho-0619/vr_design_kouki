@@ -14,7 +14,7 @@
       position: absolute;
       top: 0;
       right: 0;
-      pointer-events: none;
+      pointer-events: auto;
       background-color: red;
       opacity: 0.5;
     }
@@ -39,6 +39,17 @@
     display: block;
     width:100%;
     font-size: 16px;
+}
+
+#config-select{
+    width:100%;
+    display:none;
+    padding:5px;
+}
+
+#paramArea, #mapArea{
+    padding:5px;
+    display:none;
 }
 
 @keyframes openParams {

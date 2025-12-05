@@ -1,12 +1,12 @@
 export class Character {
-    constructor(name, health, strength, create, map_size) {
-        this.name = name;
-        this.health = health;
-        this.strength = strength;
-        this.create = create;
-        this.map_size = map_size;
+    constructor(config) {
+        this.name = config.name;
+        this.health = config.health;
+        this.strength = config.strength;
+        this.create = config.create;
+        this.map_size = config.map_size;
         this.size = 0.3;
-        this.position = [Math.random() * map_size[0] - map_size[0]/2, this.size / 2, Math.random() * map_size[1] - map_size[1]/2];
+        this.position = [Math.random() * this.map_size[0] - this.map_size[0]/2, this.size / 2, Math.random() * this.map_size[1] - this.map_size[1]/2];
         
         
         this.fixed_parameters = {
@@ -27,7 +27,7 @@ export class Character {
             move_z:Math.random()*2-1,                       //移動方向z
         }
 
-        this.body = create.cube({ size: this.size, position: this.position});
+        this.body = this.create.cube({ size: this.size, position: this.position});
     }
     attack(target) {
         target.health -= this.strength;

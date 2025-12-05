@@ -72,9 +72,14 @@ animate(({ delta, time }) => {
 function main(){
 }
 
+// Map Config update
 document.getElementById("mapSubmit").addEventListener("click", () => {
-    map_size[0] = parseInt(document.getElementById("mapSizeX").value);
-    map_size[1] = parseInt(document.getElementById("mapSizeY").value);
+    let input_x = document.getElementById("mapSizeX");
+    let input_y = document.getElementById("mapSizeY");
+    map_size[0] = Math.min(Math.max(parseInt(input_x.value), 5), 50);
+    map_size[1] = Math.min(Math.max(parseInt(input_y.value), 5), 50);
+    input_x.value = map_size[0];
+    input_y.value = map_size[1];
     ground.scale.set(map_size[0]/ INITIAL_MAP_SIZE[0] , map_size[1]/INITIAL_MAP_SIZE[1], 1);
     wall_size_x = [map_size[0] + WALL_THICKNESS*2, 1, WALL_THICKNESS];
     wall_size_z = [WALL_THICKNESS, 1, map_size[1] + WALL_THICKNESS*2];

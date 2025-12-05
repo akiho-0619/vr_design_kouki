@@ -8,7 +8,7 @@ const INITIAL_MAP_SIZE = [10, 10];
 const INITIAL_WALL_SIZE_X = [INITIAL_MAP_SIZE[0] + WALL_THICKNESS*2, 1, WALL_THICKNESS];
 const INITIAL_WALL_SIZE_Z = [WALL_THICKNESS, 1, INITIAL_MAP_SIZE[1] + WALL_THICKNESS*2];
 
-let map_size = INITIAL_MAP_SIZE;
+let map_size = [...INITIAL_MAP_SIZE];
 let char_count = 10;
 let characters = [];
 let wall_size_x = INITIAL_WALL_SIZE_X;
@@ -24,7 +24,7 @@ helper.axes();
 create.sky();
 
 let ground = create.plane({
-    size: map_size,
+    size: INITIAL_MAP_SIZE,
     rotation:[-Math.PI/2, 0, 0],
     option:{
         map:load.texture("./texture/rocky_terrain_02_diff_1k.jpg", {
@@ -75,9 +75,7 @@ function main(){
 document.getElementById("mapSubmit").addEventListener("click", () => {
     map_size[0] = parseInt(document.getElementById("mapSizeX").value);
     map_size[1] = parseInt(document.getElementById("mapSizeY").value);
-
-    ground.scale.set(map_size[0]/INITIAL_MAP_SIZE[0], 1, map_size[1]/INITIAL_MAP_SIZE[1]);
-    console.log(map_size);
+    ground.scale.set(map_size[0]/ INITIAL_MAP_SIZE[0] , map_size[1]/INITIAL_MAP_SIZE[1], 1);
     wall_size_x = [map_size[0] + WALL_THICKNESS*2, 1, WALL_THICKNESS];
     wall_size_z = [WALL_THICKNESS, 1, map_size[1] + WALL_THICKNESS*2];
 

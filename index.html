@@ -26,9 +26,13 @@
 <body>
   <div id="content"></div>
   <script type="module" src="./scripts.js"></script>
-  <div id="params">
-    <button id="startButton">Start</button>
-    <button id="openButton">Open Model</button>
+  <div id="overlay">
+    <div id="params"> <!-- パラメータエリア -->
+      <button id="startButton">Start</button>
+      <button id="openButton">Open Model</button>
+      <div id="paramArea"></div>
+    </div>
+    <div id="logArea"></div>  <!-- ログエリア -->
   </div>
 
   <script type="module" src="./UI.js"></script>

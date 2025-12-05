@@ -1,3 +1,13 @@
+#overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10;
+}
+
 #params {
       width: 20vw;
       /* height: 100vh; */
@@ -9,6 +19,16 @@
       opacity: 0.5;
     }
 
+#logArea {
+    width: 20vw;
+    height: 30vh;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    pointer-events: auto;
+    background-color: blue;
+    opacity: 0.5;
+}
 #content{
     width:100vw;
     height:100vh;
@@ -26,15 +46,23 @@
         height: 0;
     }
     to {
-        height: 100%;
+        height: 70vh;
     }
 }
 
 @keyframes closeParams {
     from {
-        height: 100%;
+        height: 70vh;
     }
     to {
         height: 0;
     }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }

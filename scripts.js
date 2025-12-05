@@ -1,5 +1,5 @@
 import { init } from "easy-three";
-const { camera, create, animate, controls, load, helper } = init();
+const { camera, create, animate, controls, load, helper } = init("#content");
 import { Character } from "./character.js";
 // import { MapObject } from "./MapObjects.js";
 

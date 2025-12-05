@@ -29,3 +29,12 @@
         height: 100%;
     }
 }
+
+@keyframes closeParams {
+    from {
+        height: 100%;
+    }
+    to {
+        height: 0;
+    }
+}

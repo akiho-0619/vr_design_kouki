@@ -1,12 +1,31 @@
 #params {
-    min-height: 100px;
-    min-width:100px;
-    position:absolute;
-    background-color: red;
-    left:45%;
-    bottom:0px;
+      width: 20vw;
+      /* height: 100vh; */
+      position: absolute;
+      top: 0;
+      right: 0;
+      pointer-events: none;
+      background-color: red;
+      opacity: 0.5;
     }
 
-body{
-    max-height: 100vh;
+#content{
+    width:100vw;
+    height:100vh;
+}
+
+#params button {
+    pointer-events: auto;
+    display: block;
+    width:100%;
+    font-size: 16px;
+}
+
+@keyframes openParams {
+    from {
+        height: 0;
+    }
+    to {
+        height: 100%;
+    }
 }

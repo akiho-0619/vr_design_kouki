@@ -34,12 +34,13 @@
     <div id="params"> <!-- パラメータエリア -->
       <button id="startButton">Start</button>
       <button id="openButton">Open config</button>
+
       <select name="config" id="config-select">
         <option value="mapConfig">map config</option>
         <option value="characterConfig">character config</option>
       </select>
 
-      <div id="mapArea">
+      <div id="mapArea">  <!-- マップコンフィグ -->
         <label for="mapSizeX">Map Size X:</label>
         <input type="number" id="mapSizeX" value="10" max="100" min="5"><br>
         <label for="mapSizeY">Map Size Y:</label>
@@ -47,7 +48,8 @@
 
         <button id="mapSubmit">Submit</button>
       </div>
-      <div id="paramArea">
+      
+      <div id="paramArea"> <!-- キャラクターコンフィグ -->
       </div>
 
       <!--

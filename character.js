@@ -7,6 +7,12 @@ export class Character {
         this.map_size = config.map_size;
         this.size = 0.3;
         this.position = [Math.random() * this.map_size[0] - this.map_size[0]/2, this.size / 2, Math.random() * this.map_size[1] - this.map_size[1]/2];
+        this.ARM_SIZE = [0.08, 0.2, 0.08];
+
+        this.moveTo = [null, null];
+        this.action_markov_chain = {
+
+        }
         
         
         this.fixed_parameters = {
@@ -27,7 +33,15 @@ export class Character {
             move_z:Math.random()*2-1,                       //移動方向z
         }
 
-        this.body = this.create.cube({ size: this.size, position: this.position});
+        this.body = this.create.group({
+            position: this.position,
+            children:[
+                this.create.cube({ size: this.size, position: [0, 0, 0] }), //body
+                this.create.cube({ size: this.ARM_SIZE, position: [this.size/2 + this.ARM_SIZE[0]/2, 0, 0], option:{color:"red"} }), //right arm
+                this.create.cube({ size: this.ARM_SIZE, position: [-(this.size/2 + this.ARM_SIZE[0]/2), 0, 0], option:{color:"red"} }), //left arm
+            ]
+        })
+        //this.create.cube({ size: this.size, position: this.position});
     }
     attack(target) {
         target.health -= this.strength;
@@ -35,21 +49,14 @@ export class Character {
     }
 
     move(){
-        this.position[0] += this.variable_parameters.move_x * this.fixed_parameters.speed * 0.1;
-        this.position[2] += this.variable_parameters.move_z * this.fixed_parameters.speed * 0.1;
-        if (this.position[0] >this.map_size[0]/2){
-            this.variable_parameters.move_x = Math.random()*-1;
+        let dist = Math.sqrt((this.position[0]-this.moveTo[0])**2 + (this.position[2]-this.moveTo[1])**2);
+        this.position[0] += ((this.moveTo[0]-this.position[0])/dist) * this.fixed_parameters.speed * 0.1;
+        this.position[2] += ((this.moveTo[1]-this.position[2])/dist) * this.fixed_parameters.speed * 0.1;
+        this.body.position.set(...this.position);
+
+        if(dist < 0.5 || this.moveTo[0] === null){
+            this.moveTo[0] = Math.random() * this.map_size[0] - this.map_size[0]/2;
+            this.moveTo[1] = Math.random() * this.map_size[1] - this.map_size[1]/2;
         }
-        else if (this.position[0] <-this.map_size[0]/2){
-            this.variable_parameters.move_x = Math.random();
-        }
-        if (this.position[2] >this.map_size[1]/2){
-            this.variable_parameters.move_z = Math.random()*-1;
-        }
-        else if (this.position[2] <-this.map_size[1]/2){
-            this.variable_parameters.move_z = Math.random();
-        }
-        this.body.position.x = this.position[0];
-        this.body.position.z = this.position[2];
     }
 }

@@ -4,9 +4,9 @@ export class Character {
         this.health = config.health;
         this.strength = config.strength;
         this.create = config.create;
-        this.map_size = config.map_size;
+        this.mapSize = config.mapSize;
         this.size = 0.3;
-        this.position = [Math.random() * this.map_size[0] - this.map_size[0]/2, this.size / 2, Math.random() * this.map_size[1] - this.map_size[1]/2];
+        this.position = [Math.random() * this.mapSize[0] - this.mapSize[0]/2, this.size / 2, Math.random() * this.mapSize[1] - this.mapSize[1]/2];
         this.ARM_SIZE = [0.08, 0.2, 0.08];
 
         this.moveTo = [null, null];
@@ -55,8 +55,8 @@ export class Character {
         this.body.position.set(...this.position);
 
         if(dist < 0.5 || this.moveTo[0] === null){
-            this.moveTo[0] = Math.random() * this.map_size[0] - this.map_size[0]/2;
-            this.moveTo[1] = Math.random() * this.map_size[1] - this.map_size[1]/2;
+            this.moveTo[0] = Math.random() * this.mapSize[0] - this.mapSize[0]/2;
+            this.moveTo[1] = Math.random() * this.mapSize[1] - this.mapSize[1]/2;
         }
     }
 }

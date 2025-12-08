@@ -64,10 +64,14 @@ export class River{
 
         let positions = this.ground.geometry.attributes.position;
         let seg = Math.sqrt(positions.count);
+        let offset = 0;
         for (let i=0; i<seg; i++){
-            let index  = i * seg + this.startingPoint[0] / this.mapSize[0] * this.groundSegments;
-            let x = positions.getZ(index);
-            positions.setZ(index, x-1)
+            for (let j = -this.width; j < this.width+1; j++){
+                let index  = i * seg +Math.round(this.startingPoint[0] / this.mapSize[0] * seg) + j;
+                let x = positions.getZ(index+Math.round(offset));
+                positions.setZ(index + Math.round(offset), x+(-5 + Math.abs(j)) * 0.075); //(j-5)*0.2);
+                offset += Math.random() < 0.1? 0.1: 0;
+            }
         }
     }
 }

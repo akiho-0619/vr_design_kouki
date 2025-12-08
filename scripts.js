@@ -22,6 +22,10 @@ create.ambientLight(
 create.directionalLight()
 helper.axes();
 create.sky();
+create.water( "./texture/water/NormalMap-1.jpg",
+  "./texture/water/NormalMap-2.jpg",
+  {size:mapSize, position:[0, -0.01, 0]
+});
 
 // ground
 let ground = create.plane({
@@ -29,9 +33,10 @@ let ground = create.plane({
     rotation:[-Math.PI/2, 0, 0],
     segments: 100,
     option:{
-        map:load.texture("./texture/rocky_terrain_02_diff_1k.jpg", {
+        map:load.texture("./texture/rocky/rocky_terrain_02_diff_1k.jpg", {
             repeat: [10, 10],
         }),
+        // wireframe:true,
     }
 })
 

@@ -27,6 +27,8 @@ const water = create.water( "./texture/water/NormalMap-1.jpg",
   {size:mapSize, position:[0, -0.01, 0]
 });
 
+let is_activated = false;
+
 // ground
 const ground_img = load.texture("./texture/rocky/rocky_terrain_02_diff_1k.jpg", {
             repeat: [10, 10],
@@ -82,13 +84,12 @@ const river = new MapObject.River({
 });
 
 animate(({ delta, time }) => {
-    for (let char of characters) {
-        char.move();
+    if (is_activated) {
+        for (let char of characters) {
+            char.action();
+        }
     }
 })
-
-function main(){
-}
 
 // Map Config update
 document.getElementById("mapSubmit").addEventListener("click", () => {
@@ -117,3 +118,9 @@ document.getElementById("mapSubmit").addEventListener("click", () => {
     river.reloadRiver();
     water.scale.set(mapSize[0]/ INITIAL_MAP_SIZE[0] , mapSize[1]/INITIAL_MAP_SIZE[1], 1);
 });
+
+// Start/Stop button
+document.getElementById("startButton").addEventListener("click", () => {
+    is_activated = !is_activated;
+    document.getElementById("startButton").innerText = is_activated ? "Stop" : "Start";
+})

@@ -44,6 +44,15 @@ export class Character {
         })
         //this.create.cube({ size: this.size, position: this.position});
     }
+
+    action(){
+        switch(this.current_action){
+            case "move":
+                this.move();
+                break;
+        }
+    }
+
     attack(target) {
         target.health -= this.strength;
         console.log(`${this.name} attacks ${target.name} for ${this.strength} damage!`);

@@ -3,8 +3,9 @@ export class Character {
         this.name = config.name;
         this.health = config.health;
         this.strength = config.strength;
-        this.create = config.create;
         this.mapSize = config.mapSize;
+        this.create = config.create;
+        this.three = config.three;
         this.size = 0.3;
         this.position = [Math.random() * this.mapSize[0] - this.mapSize[0]/2, this.size / 2, Math.random() * this.mapSize[1] - this.mapSize[1]/2];
         this.ARM_SIZE = [0.08, 0.2, 0.08];
@@ -36,7 +37,7 @@ export class Character {
         this.body = this.create.group({
             position: this.position,
             children:[
-                this.create.cube({ size: this.size, position: [0, 0, 0] }), //body
+                this.create.cube({ size: this.size, position: [0, 0, 0], option:{color:"white"} }), //body
                 this.create.cube({ size: this.ARM_SIZE, position: [this.size/2 + this.ARM_SIZE[0]/2, 0, 0], option:{color:"red"} }), //right arm
                 this.create.cube({ size: this.ARM_SIZE, position: [-(this.size/2 + this.ARM_SIZE[0]/2), 0, 0], option:{color:"red"} }), //left arm
             ]
@@ -57,6 +58,10 @@ export class Character {
         if(dist < 0.5 || this.moveTo[0] === null){
             this.moveTo[0] = Math.random() * this.mapSize[0] - this.mapSize[0]/2;
             this.moveTo[1] = Math.random() * this.mapSize[1] - this.mapSize[1]/2;
+
+            let deg = Math.asin((this.moveTo[1]-this.position[2]) / Math.sqrt((this.moveTo[0]-this.position[0])**2 + (this.moveTo[1]-this.position[2])**2));
+            if(this.moveTo[0] < this.position[0]) deg = Math.PI - deg;
+            this.body.rotation.y = deg;
         }
     }
 }

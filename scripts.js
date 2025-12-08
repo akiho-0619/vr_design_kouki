@@ -1,5 +1,5 @@
 import { init } from "easy-three";
-const { camera, create, animate, controls, load, helper } = init("#content");
+const { camera, create, animate, controls, load, helper, THREE } = init("#content");
 import { Character } from "./character.js";
 import * as MapObject from "./MapObjects.js";
 
@@ -22,20 +22,21 @@ create.ambientLight(
 create.directionalLight()
 helper.axes();
 create.sky();
-create.water( "./texture/water/NormalMap-1.jpg",
+const water = create.water( "./texture/water/NormalMap-1.jpg",
   "./texture/water/NormalMap-2.jpg",
   {size:mapSize, position:[0, -0.01, 0]
 });
 
 // ground
+const ground_img = load.texture("./texture/rocky/rocky_terrain_02_diff_1k.jpg", {
+            repeat: [10, 10],
+        })
 let ground = create.plane({
     size: INITIAL_MAP_SIZE,
     rotation:[-Math.PI/2, 0, 0],
     segments: 100,
     option:{
-        map:load.texture("./texture/rocky/rocky_terrain_02_diff_1k.jpg", {
-            repeat: [10, 10],
-        }),
+        map:ground_img,
         // wireframe:true,
     }
 })
@@ -65,8 +66,9 @@ for (let i = 0; i < charCount; i++) {
         name: `Character_${i}`,
         health: 100,
         strength: 10,
+        mapSize: mapSize,
         create: create,
-        mapSize: mapSize
+        three: THREE,
     };
     let char = new Character(config);
     characters.push(char);
@@ -97,6 +99,9 @@ document.getElementById("mapSubmit").addEventListener("click", () => {
     input_x.value = mapSize[0];
     input_y.value = mapSize[1];
     ground.scale.set(mapSize[0]/ INITIAL_MAP_SIZE[0] , mapSize[1]/INITIAL_MAP_SIZE[1], 1);
+    console.log(ground)
+    // ground.material.map.repeat.set(mapSize)
+    ground_img.repeat.set(mapSize[0], mapSize[1]);
     wallSizeX = [mapSize[0] + WALL_THICKNESS*2, 1, WALL_THICKNESS];
     wallSizeZ = [WALL_THICKNESS, 1, mapSize[1] + WALL_THICKNESS*2];
 
@@ -109,6 +114,6 @@ document.getElementById("mapSubmit").addEventListener("click", () => {
             walls[i].position.x = (i === 2) ? -(mapSize[0]/2 + WALL_THICKNESS/2) : (mapSize[0]/2 + WALL_THICKNESS/2);
         }
     }
-
-    console.log(walls);
+    river.reloadRiver();
+    water.scale.set(mapSize[0]/ INITIAL_MAP_SIZE[0] , mapSize[1]/INITIAL_MAP_SIZE[1], 1);
 });

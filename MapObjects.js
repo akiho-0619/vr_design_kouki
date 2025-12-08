@@ -62,9 +62,18 @@ export class River{
         this.startingPoint = [this.mapSize[0]/2, 0, Math.round(Math.random()*this.mapSize[1]-this.mapSize[1]/2)];
         this.routes = [];
 
+        this.reloadRiver();
+    }
+
+    reloadRiver(){
         let positions = this.ground.geometry.attributes.position;
+        for (let i=0; i<positions.count; i++){
+            positions.setZ(i, 0);
+        }
+
         let seg = Math.sqrt(positions.count);
         let offset = 0;
+        console.log(seg);
         for (let i=0; i<seg; i++){
             for (let j = -this.width; j < this.width+1; j++){
                 let index  = i * seg +Math.round(this.startingPoint[0] / this.mapSize[0] * seg) + j;
